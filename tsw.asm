@@ -1,0 +1,1321 @@
+00010 ;   The Sillycon War:
+00020 ;      Source code
+00030 ;   Program developed
+00040 ;  under the IMAGE GOS
+00050 ;     By  Maz Spork
+00060 ;
+00070 ;   Print Date:
+00080 ;
+00090 ;
+00100 WORKPG EQU  #7F00
+00110 IMAGES EQU  #A0
+00120 COLISN EQU  #69C4
+00130 SETUP  EQU  #6BED
+00140 ;
+00150        ORG  #5B00
+00160        LD HL,#61A8
+00170        LD DE,#F200
+00180        LD BC,#0E00
+00190        LDIR
+00200        RET
+00210 ;
+00220        ORG  #6D8B
+00230 ;
+00240 SPRTAB DEFS #0100
+00250 ;
+00260 UPDTAB DEFS #0020
+00270 ;
+00280 ACTTAB DEFS #0080
+00290 ;
+00300 AADTAB DEFW ACTN1
+00310        DEFW ACTN2
+00320        DEFW ACTN3
+00330        DEFW ACTN4
+00340        DEFW ACTN5
+00350        DEFW ACTN6
+00360        DEFW ACTN7
+00370        DEFW ACTN8
+00380        DEFW 0
+00390        DEFW 0
+00400        DEFW 0
+00410        DEFW 0
+00420        DEFW 0
+00430        DEFW 0
+00440        DEFW 0
+00450        DEFW 0
+00460 ;
+00470 UADTAB DEFW USE1
+00480        DEFW USE2
+00490        DEFW USE3
+00500        DEFW 0
+00510        DEFW 0
+00520        DEFW 0
+00530        DEFW 0
+00540        DEFW 0
+00550        DEFW 0
+00560        DEFW 0
+00570        DEFW 0
+00580        DEFW 0
+00590        DEFW 0
+00600        DEFW 0
+00610        DEFW 0
+00620        DEFW 0
+00630 ;
+00640 ORGTAB DEFB 6,47,1
+00650        DEFB 1,4,4
+00660        DEFB 13,77,2
+00670        DEFB 28,1,0
+00680        DEFB 128,74,0
+00690        DEFB 0,0,0
+00700        DEFB 128,75,0
+00710        DEFB 0,0,0
+00720        DEFB 19,57,0
+00730        DEFB 17,33,0
+00740        DEFB 0
+00750        DEFS 65
+00760 ;
+00770 DIMTAB DEFB 2,2,15,0
+00780        DEFB 5,2,15,0
+00790        DEFB 5,2,15,0
+00800        DEFB 2,2,15,0
+00810        DEFB 2,5,15,0
+00820        DEFB 2,5,15,0
+00830        DEFB 0,0,0,0
+00840        DEFB 0,0,0,0
+00850        DEFB 8,2,15,0
+00860        DEFB 8,2,15,0
+00870        DEFB 8,2,15,0
+00880        DEFB 8,2,15,0
+00890        DEFB 7,7,15,0
+00900        DEFB 7,7,15,0
+00910        DEFB 7,7,15,0
+00920        DEFB 7,7,15,0
+00930        DEFB 7,7,15,0
+00940        DEFB 7,7,15,0
+00950        DEFB 7,7,15,0
+00960        DEFB 7,7,15,0
+00970        DEFB 7,7,15,0
+00980        DEFB 7,7,15,0
+00990        DEFB 7,7,15,0
+01000        DEFB 7,7,15,0
+01010        DEFB 7,7,15,0
+01020        DEFB 7,7,15,0
+01030        DEFB 7,7,15,0
+01040        DEFB 7,7,15,0
+01050        DEFB 3,3,15,0
+01060        DEFB 3,3,15,0
+01070        DEFB 3,3,15,0
+01080        DEFB 3,3,15,0
+01090        DEFB 3,3,15,0
+01100        DEFB 3,3,15,0
+01110        DEFB 3,3,15,0
+01120        DEFB 3,3,15,0
+01130        DEFB 3,3,15,0
+01140        DEFB 3,3,15,0
+01150        DEFB 3,3,15,0
+01160        DEFB 3,3,15,0
+01170        DEFB 6,7,4,6
+01180        DEFB 6,7,4,6
+01190        DEFB 3,3,15,0
+01200        DEFB 1,7,31,0
+01210        DEFB 1,7,31,0
+01220        DEFB 7,3,4,0
+01230        DEFB 7,4,2,0
+01240        DEFB 7,7,7,0
+01250        DEFB 7,7,11,0
+01260        DEFB 7,7,31,0
+01270        DEFB 7,7,31,0
+01280        DEFB 7,7,03,0
+01290        DEFB 7,7,11,0
+01300        DEFB 7,7,15,0
+01310        DEFB 4,4,15,0
+01320        DEFB 4,4,23,0
+01330        DEFB 7,7,12,0
+01340        DEFB 7,7,15,0
+01350        DEFB 7,7,15,0
+01360        DEFB 4,4,15,0
+01370        DEFB 4,4,15,0
+01380        DEFB 6,6,15,0
+01390        DEFB 6,6,15,0
+01400        DEFB 6,6,15,0
+01410        DEFB 0,8,31,0
+01420        DEFB 0,8,31,0
+01430        DEFB 0,8,31,0
+01440        DEFB 0,8,31,0
+01450        DEFB 7,7,11,0
+01460        DEFB 7,7,7,6
+01470        DEFB 15,7,3,0
+01480        DEFB 7,7,3,0
+01490        DEFB 7,7,11,0
+01500        DEFB 4,7,7,0
+01510        DEFB 4,7,3,0
+01520        DEFB 7,7,0,0
+01530        DEFB 6,6,4,0
+01540        DEFB 3,7,4,0
+01550        DEFB 3,7,4,0
+01560        DEFB 3,7,4,0
+01570        DEFB 3,7,4,0
+01580        DEFS #0038
+01590 ;
+01600 EXTTAB DEFS #0080
+01610 ;
+01620 GADTAB DEFW GROL1
+01630        DEFW GROL2
+01640        DEFW GROL3
+01650        DEFW GROL4
+01660        DEFW GROL5
+01670        DEFW GROL6
+01680        DEFW GROL7
+01690        DEFW GROL8
+01700        DEFW GROL9
+01710        DEFW #0000
+01720        DEFW #0000
+01730        DEFW #0000
+01740        DEFW #0000
+01750        DEFW #0000
+01760        DEFW #0000
+01770        DEFW #0000
+01780 ;
+01790 TADTAB DEFW TOKEN1
+01800        DEFW TOKEN2
+01810        DEFW TOKEN3
+01820        DEFW TOKEN4
+01830        DEFW TOKEN5
+01840        DEFW TOKEN6
+01850        DEFW TOKEN7
+01860        DEFW TOKEN8
+01870        DEFW TOKEN9
+01880        DEFW TOKENA
+01890        DEFW TOKENB
+01900        DEFW TOKENC
+01910        DEFW TOKEND
+01920        DEFW TOKENE
+01930        DEFW TOKENF
+01940        DEFW TOKENG
+01950        DEFW TOKENH
+01960        DEFW TOKENI
+01970        DEFS #001C
+01980 ;
+01990 BCKTAB DEFW #5B00,#5BA0
+02000        DEFW #5C40,#5CE0
+02010        DEFW #5D80,#5E20
+02020        DEFW #5EC0,#5F60
+02030        DEFW #6000,#60A0
+02040        DEFW #6140,#61E0
+02050        DEFW #6280,#6320
+02060        DEFW #63C0
+02070 ;
+02080 MANDAT DEFB 28,1,30,31,30
+02090        DEFB 29,0,0,0,0,0
+02100        DEFB 0,0,0,0,5
+02110 ;
+02120 MIDSCR DEFB 28,28,0
+02130 ;
+02140 MANINF DEFS #0010
+02150 UPDPTR DEFW #0000
+02160 MIRPTR DEFW #0000
+02170 ACTPTR DEFW #0000
+02180 INVPTR DEFW INVTRY
+02190 TEMPSP DEFW #0000
+02200 CURSPR DEFW #0000
+02210 XYZADR DEFW #0000
+02220 CTRLTL DEFW #FE02
+02230 CTRLTR DEFW #FE04
+02240 CTRLWA DEFW #BF08
+02250 CTRLJP DEFW #DF04
+02260 CTRLGE DEFW #DF02
+02270 CTRLDR DEFW #DF01
+02280 CTRLUS DEFW #DF08
+02290 INVTRY DEFW 0,0
+02300 NODYNA DEFB 0
+02310 NOSTAT DEFB 0
+02320 SPRCNT DEFB 0
+02330 TRNCNT DEFB 0
+02340 OLDX   DEFB 0
+02350 OLDY   DEFB 0
+02360 OLDZ   DEFB 0
+02370 EXTX   DEFB 0
+02380 EXTY   DEFB 0
+02390 EXTZ   DEFB 0
+02400 EXTNUM DEFB 0
+02410 COUNTR DEFB 0
+02420 ENERGY DEFB 0
+02430 CURLOG DEFB 0
+02440 CURPHY DEFB 0
+02450 CURROM DEFB 0
+02460 FLAGS1 DEFB 0
+02470 COLOUR DEFB 0
+02480 OLDCOL DEFB 0
+02490 PIXEL  DEFB 0
+02500 PIXADD DEFB 0
+02510 ;
+02520 CURENT DEFS #0200
+02530 ;
+02540 RADTAB DEFS #00A0
+02550 ;
+02560 COLIS2 PUSH IX
+02570        PUSH IY
+02580        CALL COLISN
+02590        POP  IY
+02600        POP  IX
+02610        RET
+02620 ;
+02630 PUTWRD DEFB #FD
+02640        LD   A,L
+02650        LD   (DE),A
+02660        INC  DE
+02670        DEFB #FD
+02680        LD   A,H
+02690        LD   (DE),A
+02700        INC  DE
+02710        RET
+02720 ;
+02730 NXTROW INC  D
+02740        LD   A,D
+02750        AND  7
+02760        RET  NZ
+02770        LD   A,E
+02780        ADD  A,#20
+02790        LD   E,A
+02800        RET  C
+02810        LD   A,D
+02820        SUB  8
+02830        LD   D,A
+02840        RET
+02850 ;
+02860 POKE   LD   A,L
+02870 POKE1  INC  L
+02880        LD   (HL),C
+02890        DJNZ POKE1
+02900        INC  L
+02910        LD   C,L
+02920        LD   L,A
+02930        RET
+02940 ;
+02950 PUTXYZ LD   A,(HL)
+02960        LD   (IY+1),A
+02970        INC  HL
+02980        LD   A,(HL)
+02990        LD   (IY+2),A
+03000        INC  HL
+03010        LD   A,(HL)
+03020        LD   (IY+3),A
+03030        INC  HL
+03040        RET
+03050 ;
+03060 RESREG LD   DE,(XYZADR)
+03070        LD   HL,OLDX
+03080        LDI
+03090        LDI
+03100        LDI
+03110        RET
+03120 ;
+03130 ACTION LD   A,(CURLOG)
+03140        LD   L,A
+03150        LD   H,0
+03160        LD   DE,ACTTAB-1
+03170        ADD  HL,DE
+03180        LD   A,(HL)
+03190        OR   A
+03200        RET  Z
+03210        JP   M,ACTN3
+03220        LD   L,A
+03230        LD   H,0
+03240        LD   DE,AADTAB-2
+03250        ADD  HL,HL
+03260        ADD  HL,DE
+03270        LD   A,(HL)
+03280        INC  HL
+03290        LD   H,(HL)
+03300        LD   L,A
+03310        JP   (HL)
+03320 ;
+03330 TRNRND LD   A,R
+03340        RRA
+03350        JR   C,TRNRGT
+03360 ;
+03370 TRNLFT CALL RESREG
+03380        CALL ACTION
+03390        LD   A,(IX)
+03400        LD   B,(IX+1)
+03410        NEG
+03420        LD   (IX+1),A
+03430        LD   (IX),B
+03440        LD   HL,(CURSPR)
+03450        LD   A,(HL)
+03460        SUB  #40
+03470        LD   (HL),A
+03480        RET
+03490 ;
+03500 TRNRGT CALL RESREG
+03510        CALL ACTION
+03520        LD   A,(IX+1)
+03530        LD   B,(IX)
+03540        NEG
+03550        LD   (IX),A
+03560        LD   (IX+1),B
+03570        LD   HL,(CURSPR)
+03580        LD   A,(HL)
+03590        ADD  A,#40
+03600        LD   (HL),A
+03610        RET
+03620 ;
+03630 BOUNCE CALL RESREG
+03640        CALL ACTION
+03650        LD   A,(IX)
+03660        NEG
+03670        LD   (IX),A
+03680        LD   A,(IX+1)
+03690        NEG
+03700        LD   (IX+1),A
+03710        LD   A,(HL)
+03720        LD   HL,(CURSPR)
+03730        LD   A,(HL)
+03740        ADD  A,#80
+03750        LD   (HL),A
+03760        RET
+03770 ;
+03780 GRVITY DEC  (IY+1)
+03790        RES  6,(IY)
+03800        SET  5,(IY)
+03810        LD   HL,(XYZADR)
+03820        INC  HL
+03830        INC  HL
+03840        LD   A,(HL)
+03850        PUSH AF
+03860        ADD  A,(IY+1)
+03870        JP   P,GRAV03
+03880        SUB  (HL)
+03890        LD   A,#7F
+03900        JP   P,GRAV04
+03910        XOR  A
+03920 GRAV04 RES  7,(IY)
+03930        SET  6,(IY)
+03940        LD   (IY+1),0
+03950 GRAV03 LD   (HL),A
+03960        LD   A,(SPRCNT)
+03970        PUSH HL
+03980        CALL COLIS2
+03990        POP  HL
+04000        POP  BC
+04010        JR   Z,GRAV01
+04020        LD   (HL),B
+04030        LD   A,(IY+1)
+04040        OR   A
+04050        JP   P,GRAV02
+04060        LD   A,(EXTZ)
+04070        INC  A
+04080        LD   (HL),A
+04090        LD   (IY+1),0
+04100        RES  7,(IY)
+04110        JP   ACTION
+04120 GRAV02 LD   (IY+1),0
+04130 GRAV01 SET  7,(IY)
+04140        BIT  6,(IY)
+04150        RET  Z
+04160        RES  7,(IY)
+04170        RET
+04180 ;
+04190 ACTN1  BIT  5,(IY)
+04200        RET  Z
+04210        LD   A,(CURLOG)
+04220        LD   L,A
+04230        LD   H,0
+04240        LD   DE,CURENT-1
+04250        ADD  HL,HL
+04260        ADD  HL,HL
+04270        ADD  HL,DE
+04280        DEC  (HL)
+04290        PUSH HL
+04300        LD   HL,NOSTAT
+04310        SUB  (HL)
+04320        CALL COLIS2
+04330        POP  HL
+04340        JR   Z,ACTN1A
+04350        INC  (HL)
+04360        RET
+04370 ACTN1A LD   (IX+2),#FF
+04380        RET
+04390 ;
+04400 ACTN2  BIT  5,(IY)
+04410        RET  Z
+04420        LD   A,(CURLOG)
+04430        LD   HL,NOSTAT
+04440        SUB  (HL)
+04450        LD   L,A
+04460        LD   H,0
+04470        ADD  HL,HL
+04480        ADD  HL,HL
+04490        ADD  HL,HL
+04500        ADD  HL,HL
+04510        LD   DE,SPRTAB-#10
+04520        ADD  HL,DE
+04530        LD   A,(HL)
+04540        AND  7
+04550        ADD  A,2
+04560        LD   E,A
+04570        LD   D,0
+04580        ADD  HL,DE
+04590        LD   A,(HL)
+04600        ADD  A,(IX)
+04610        LD   (IX),A
+04620        INC  HL
+04630        LD   A,(HL)
+04640        ADD  A,(IX+1)
+04650        LD   (IX+1),A
+04660        INC  HL
+04670        LD   A,(HL)
+04680        ADD  A,(IX+2)
+04690        LD   (IX+2),A
+04700        RET
+04710 ;
+04720 ACTN3  JP   SETUP
+04730 ;
+04740 ACTN4  BIT  5,(IY)
+04750        RET  NZ
+04760        LD   A,(CURLOG)
+04770        LD   HL,NOSTAT
+04780        SUB  (HL)
+04790        LD   L,A
+04800        LD   H,0
+04810        ADD  HL,HL
+04820        ADD  HL,HL
+04830        ADD  HL,HL
+04840        ADD  HL,HL
+04850        LD   DE,SPRTAB-#10
+04860        ADD  HL,DE
+04870        LD   A,(HL)
+04880        AND  7
+04890        ADD  A,2
+04900        LD   E,A
+04910        LD   D,0
+04920        ADD  HL,DE
+04930        LD   A,(IX)
+04940        LD   (HL),A
+04950        INC  HL
+04960        LD   A,(IX+1)
+04970        LD   (HL),A
+04980        INC  HL
+04990        LD   A,(IX+2)
+05000        LD   (HL),A
+05010        RET
+05020 ;
+05030 ACTN5  LD   HL,NOSTAT
+05040        LD   A,(SPRCNT)
+05050        ADD  A,(HL)
+05060        LD   E,A
+05070        LD   D,0
+05080        LD   HL,ACTTAB-1
+05090        ADD  HL,DE
+05100        LD   E,(HL)
+05110        LD   HL,GTABLE
+05120        ADD  HL,DE
+05130        LD   A,(HL)
+05140        OR   A
+05150        RET  Z
+05160        LD   B,A
+05170        JP   DRAIN1
+05180 ;
+05190 ACTN6  LD   HL,(CURSPR)
+05200        LD   DE,#F
+05210        ADD  HL,DE
+05220        LD   A,(HL)
+05230        CP   5
+05240        RET  NZ
+05250        LD   B,1
+05260        JP   DRAIN1
+05270 ;
+05280 ACTN7  LD   HL,(INVPTR)
+05290        LD   A,(HL)
+05300        CP   3
+05310        LD   A,19+#80
+05320        JP   Z,SETUP
+05330        LD   HL,TEXT1
+05340        LD   (#FFFE),HL
+05350        RET
+05360 ;
+05370 ACTN8  BIT  5,(IY)
+05380        RET  Z
+05390        LD   A,(CURLOG)
+05400        LD   L,A
+05410        LD   H,0
+05420        LD   DE,CURENT-1
+05430        ADD  HL,HL
+05440        ADD  HL,HL
+05450        ADD  HL,DE
+05460        INC  (HL)
+05470        PUSH HL
+05480        LD   A,(SPRCNT)
+05490        LD   B,A
+05500        LD   HL,NOSTAT
+05510        ADD  A,(HL)
+05520        LD   L,A
+05530        LD   H,0
+05540        LD   DE,CURENT-1
+05550        ADD  HL,HL
+05560        ADD  HL,HL
+05570        ADD  HL,DE
+05580        INC  (HL)
+05590        LD   A,B
+05600        PUSH HL
+05610        CALL COLIS2
+05620        POP  HL
+05630        JR   Z,ACTN8A
+05640        DEC  (HL)
+05650        POP  HL
+05660        DEC  (HL)
+05670        RET
+05680 ACTN8A POP  HL
+05690        RET
+05700 ;
+05710 ACTN9  LD   HL,(INVPTR)
+05720        LD   A,(HL)
+05730        CP   57
+05740        LD   A,5
+05750        JP   Z,SETUP
+05760        LD   HL,TEXT6
+05770        LD   (#FFFE),HL
+05780        RET
+05790 ;
+05800 ACTNA  LD   HL,(INVPTR)
+05810        LD   A,(HL)
+05820        CP   75
+05830        LD   A,4
+05840        JP   Z,SETUP
+05850        LD   HL,TEXT7
+05860        LD   (#FFFE),HL
+05870        RET
+05880 ;
+05890 EDRAIN LD   A,(CURLOG)
+05900        LD   HL,NOSTAT
+05910        DEC  A
+05920        SUB  (HL)
+05930        RET  C
+05940        ADD  A,A
+05950        ADD  A,A
+05960        ADD  A,A
+05970        ADD  A,A
+05980        LD   L,A
+05990        LD   H,0
+06000        LD   DE,SPRTAB+#F
+06010        ADD  HL,DE
+06020        LD   A,(HL)
+06030        CP   5
+06040        RET  NZ
+06050 DRAIN1 PUSH BC
+06060        CALL DRAIN2
+06070        POP  BC
+06080        DJNZ DRAIN1
+06090        XOR  A
+06100        RET
+06110 DRAIN2 LD   HL,ENERGY
+06120        LD   A,(HL)
+06130        LD   B,A
+06140        DEC  (HL)
+06150        JP   M,GAMOVR
+06160        RRCA
+06170        RRCA
+06180        RRCA
+06190        AND  #F
+06200        ADD  A,#A0
+06210        LD   D,#51
+06220        LD   E,A
+06230        LD   A,B
+06240        AND  7
+06250        INC  A
+06260        LD   B,A
+06270        LD   A,#7F
+06280 DRAIN3 RRCA
+06290        DJNZ DRAIN3
+06300        RLCA
+06310        LD   C,A
+06320        LD   B,6
+06330 DRAIN4 LD   A,(DE)
+06340        AND  C
+06350        LD   (DE),A
+06360        CALL NXTROW
+06370        DJNZ DRAIN4
+06380        RET
+06390 GAMOVR LD   HL,TEXT2
+06400        LD   (#FFFE),HL
+06410        JP   #61B1
+06420 ;
+06430 ABANDN LD   HL,TEXT5
+06440        LD   (#FFFE),HL
+06450        JP   #61B1
+06460 ;
+06470 WONGAM LD   HL,TEXT8
+06480        LD   (#FFFE),HL
+06490        JP   #61B1
+06500 ;
+06510 GROL1  RET  Z
+06520        JP   BOUNCE
+06530 ;
+06540 GROL2  RET  Z
+06550        JP   TRNRGT
+06560 ;
+06570 GROL3  RET  Z
+06580        JP   TRNLFT
+06590 ;
+06600 GROL4  JR   Z,GROL4A
+06610        CALL TRNLFT
+06620 GROL4A BIT  7,(IY)
+06630        JP   NZ,GRVITY
+06640        SET  7,(IY)
+06650        LD   (IY+1),8
+06660        JP   GRVITY
+06670 ;
+06680 BRK    LD   A,#7F
+06690        IN   A,(#FE)
+06700        RRA
+06710        RET  C
+06720        LD   A,#FE
+06730        IN   A,(#FE)
+06740        RRA
+06750        RET
+06760 ;
+06770 GROL5  CALL NZ,RESREG
+06780        CALL NZ,ACTION
+06790        CALL BRK
+06800        JP   NC,ABANDN
+06810        PUSH IX
+06820        PUSH IY
+06830        LD   BC,(CTRLGE)
+06840        LD   A,C
+06850        LD   C,#FE
+06860        IN   C,(C)
+06870        AND  C
+06880        CALL Z,GETOBJ
+06890        LD   BC,(CTRLDR)
+06900        LD   A,C
+06910        LD   C,#FE
+06920        IN   C,(C)
+06930        AND  C
+06940        CALL Z,DRPOBJ
+06950        LD   BC,(CTRLUS)
+06960        LD   A,C
+06970        LD   C,#FE
+06980        IN   C,(C)
+06990        AND  C
+07000        CALL Z,USEOBJ
+07010        LD   A,#F7
+07020        IN   A,(#FE)
+07030        AND  #F
+07040        LD   B,0
+07050 GROL5I INC  B
+07060        RRA
+07070        JR   C,GROL5I
+07080        LD   A,B
+07090        CP   5
+07100        JR   NC,GROL5J
+07110        LD   E,A
+07120        LD   D,0
+07130        LD   HL,INVTRY-1
+07140        ADD  HL,DE
+07150        LD   (INVPTR),HL
+07160        CALL PUTIMA
+07170 GROL5J POP  IY
+07180        POP  IX
+07190        LD   HL,(CURSPR)
+07200        LD   DE,TRNCNT
+07210        BIT  7,(IY)
+07220        JR   NZ,GROL5G
+07230        LD   A,(DE)
+07240        DEC  A
+07250        LD   (DE),A
+07260        JP   P,GROL5A
+07270        INC  A
+07280        LD   (DE),A
+07290        LD   BC,(CTRLTL)
+07300        LD   A,C
+07310        LD   C,#FE
+07320        IN   C,(C)
+07330        AND  C
+07340        JR   Z,GROL5B
+07350        LD   BC,(CTRLTR)
+07360        LD   A,C
+07370        LD   C,#FE
+07380        IN   C,(C)
+07390        AND  C
+07400        JR   NZ,GROL5A
+07410        LD   A,(HL)
+07420        ADD  A,#40
+07430        JR   GROL5F
+07440 GROL5G XOR  A
+07450        LD   (TRNCNT),A
+07460        JP   GRVITY
+07470 GROL5B LD   A,(HL)
+07480        SUB  #40
+07490 GROL5F LD   (HL),A
+07500        LD   A,3
+07510        LD   (TRNCNT),A
+07520 GROL5A XOR  A
+07530        LD   (IX),A
+07540        LD   (IX+1),A
+07550        LD   (IX+2),A
+07560        LD   BC,(CTRLWA)
+07570        LD   A,C
+07580        LD   C,#FE
+07590        IN   C,(C)
+07600        AND  C
+07610        JR   Z,GROL5H
+07620        INC  HL
+07630        LD   (HL),1
+07640        JR   GROL5C
+07650 GROL5H LD   B,A
+07660        LD   C,A
+07670        LD   A,(HL)
+07680        RLA
+07690        RLA
+07700        RL   C
+07710        AND  1
+07720        SUB  1
+07730        CCF
+07740        ADC  A,B
+07750        NEG
+07760        PUSH IX
+07770        ADD  IX,BC
+07780        ADD  A,(IX)
+07790        LD   (IX),A
+07800        POP  IX
+07810 GROL5C LD   BC,(CTRLJP)
+07820        LD   A,C
+07830        LD   C,#FE
+07840        IN   C,(C)
+07850        AND  C
+07860        JR   NZ,GROL5E
+07870        LD   (IY+1),7
+07880        SET  7,(IY)
+07890 GROL5E JP   GRVITY
+07900 ;
+07910 GROL6  JP   Z,GRVITY
+07920        CALL RESREG
+07930        CALL ACTION
+07940        LD   (IX),0
+07950        LD   (IX+1),0
+07960        LD   (IX+2),0
+07970        JP   GRVITY
+07980 ;
+07990 GROL7  CALL NZ,RESREG
+08000        CALL NZ,ACTION
+08010        LD   (IX),0
+08020        LD   (IX+1),0
+08030        LD   (IX+2),0
+08040        JP   GRVITY
+08050 ;
+08060 GROL8  RET  Z
+08070        CALL RESREG
+08080        LD   B,1
+08090        CALL EDRAIN
+08100        JP   TRNRND
+08110 ;
+08120 GROL9  RET  Z
+08130        CALL RESREG
+08140        LD   B,1
+08150        CALL EDRAIN
+08160        RET  Z
+08170        JP   TRNRND
+08180 ;
+08190 GTABLE DEFB 0,0,0,0,0,0,2
+08200        DEFB 1,1,1,1,1,1,1
+08210 ;
+08220 GETOBJ LD   A,(CURLOG)
+08230        OR   A
+08240        RET  Z
+08250        LD   HL,NOSTAT
+08260        SUB  (HL)
+08270        RET  C
+08280        LD   L,A
+08290        LD   H,0
+08300        ADD  HL,HL
+08310        ADD  HL,HL
+08320        ADD  HL,HL
+08330        ADD  HL,HL
+08340        LD   DE,SPRTAB-#10
+08350        ADD  HL,DE
+08360        LD   DE,(INVPTR)
+08370        LD   A,(DE)
+08380        OR   A
+08390        RET  NZ
+08400        PUSH HL
+08410        LD   A,(HL)
+08420        AND  7
+08430        ADD  A,7
+08440        LD   C,A
+08450        LD   B,0
+08460        ADD  HL,BC
+08470        BIT  4,(HL)
+08480        INC  HL
+08490        INC  HL
+08500        LD   A,(HL)
+08510        POP  HL
+08520        RET  Z
+08530        LD   (DE),A
+08540        PUSH AF
+08550        EX   DE,HL
+08560        LD   A,(NODYNA)
+08570        LD   HL,NOSTAT
+08580        ADD  A,(HL)
+08590        LD   HL,CURLOG
+08600        SUB  (HL)
+08610        EX   DE,HL
+08620        LD   (HL),0
+08630        EX   DE,HL
+08640        JR   Z,GETOB1
+08650        PUSH AF
+08660        ADD  A,A
+08670        ADD  A,A
+08680        ADD  A,A
+08690        ADD  A,A
+08700        LD   BC,#10
+08710        LD   H,D
+08720        LD   L,E
+08730        ADD  HL,BC
+08740        LD   C,A
+08750        PUSH DE
+08760        LDIR
+08770        XOR  A
+08780        LD   (DE),A
+08790        POP  HL
+08800 GETOB4 LD   A,(HL)
+08810        AND  7
+08820        JR   Z,GETOB3
+08830        ADD  A,5
+08840        LD   C,A
+08850        PUSH HL
+08860        ADD  HL,BC
+08870        LD   E,(HL)
+08880        INC  HL
+08890        LD   D,(HL)
+08900        DEC  DE
+08910        DEC  DE
+08920        DEC  DE
+08930        DEC  DE
+08940        LD   (HL),D
+08950        DEC  HL
+08960        LD   (HL),E
+08970        POP  HL
+08980        LD   C,#10
+08990        ADD  HL,BC
+09000        JR   GETOB4
+09010 GETOB3 POP  AF
+09020        LD   C,A
+09030        LD   A,(CURLOG)
+09040        LD   L,A
+09050        LD   H,0
+09060        LD   DE,ACTTAB-1
+09070        ADD  HL,DE
+09080        LD   D,H
+09090        LD   E,L
+09100        INC  HL
+09110        LDIR
+09120 GETOB1 POP  AF
+09130        ADD  A,A
+09140        LD   C,A
+09150        ADD  A,A
+09160        ADD  A,C
+09170        LD   C,A
+09180        LD   HL,ORGTAB-6
+09190        ADD  HL,BC
+09200        LD   (HL),#80
+09210        LD   A,(CURLOG)
+09220        LD   L,A
+09230        LD   H,B
+09240        ADD  HL,HL
+09250        ADD  HL,HL
+09260        LD   BC,CURENT-4
+09270        ADD  HL,BC
+09280        EX   DE,HL
+09290        LD   A,(NOSTAT)
+09300        LD   HL,NODYNA
+09310        ADD  A,(HL)
+09320        LD   HL,CURLOG
+09330        SUB  (HL)
+09340        ADD  A,A
+09350        ADD  A,A
+09360        LD   C,A
+09370        LD   B,0
+09380        LD   L,E
+09390        LD   H,D
+09400        JR   Z,GETOB2
+09410        INC  HL
+09420        INC  HL
+09430        INC  HL
+09440        INC  HL
+09450        LDIR
+09460 GETOB2 XOR  A
+09470        LD   (DE),A
+09480        LD   HL,NODYNA
+09490        DEC  (HL)
+09500        JP   PUTIMA
+09510 ;
+09520 DRPOBJ LD   HL,(INVPTR)
+09530        LD   A,(HL)
+09540        OR   A
+09550        RET  Z
+09560        ADD  A,A
+09570        LD   C,A
+09580        ADD  A,A
+09590        ADD  A,C
+09600        LD   E,A
+09610        LD   D,0
+09620        LD   IY,ORGTAB-6
+09630        ADD  IY,DE
+09640        LD   A,(CURROM)
+09650        LD   (IY),A
+09660        LD   A,(NODYNA)
+09670        ADD  A,A
+09680        ADD  A,A
+09690        ADD  A,A
+09700        ADD  A,A
+09710        LD   L,A
+09720        LD   H,0
+09730        LD   DE,SPRTAB
+09740        ADD  HL,DE
+09750        LD   (HL),1
+09760        INC  HL
+09770        LD   (HL),1
+09780        INC  HL
+09790        LD   A,(IY+1)
+09800        LD   (HL),A
+09810        INC  HL
+09820        XOR  A
+09830        LD   (HL),A
+09840        INC  HL
+09850        LD   (HL),A
+09860        INC  HL
+09870        LD   (HL),A
+09880        INC  HL
+09890        EX   DE,HL
+09900        LD   A,(NOSTAT)
+09910        LD   HL,NODYNA
+09920        ADD  A,(HL)
+09930        INC  (HL)
+09940        LD   L,A
+09950        LD   H,0
+09960        ADD  HL,HL
+09970        ADD  HL,HL
+09980        LD   BC,CURENT
+09990        ADD  HL,BC
+10000        LD   A,(IY+1)
+10010        LD   (HL),A
+10020        LD   BC,(XYZADR)
+10030        LD   A,(BC)
+10040        LD   (IY+3),A
+10050        INC  HL
+10060        INC  BC
+10070        LD   (HL),A
+10080        LD   A,(BC)
+10090        LD   (IY+4),A
+10100        INC  HL
+10110        INC  BC
+10120        LD   (HL),A
+10130        LD   A,(BC)
+10140        LD   (IY+5),A
+10150        INC  HL
+10160        LD   (HL),A
+10170        INC  HL
+10180        XOR  A
+10190        LD   (HL),A
+10200        DEC  HL
+10210        DEC  HL
+10220        DEC  HL
+10230        DEC  HL
+10240        EX   DE,HL
+10250        LD   (HL),E
+10260        INC  HL
+10270        LD   (HL),D
+10280        INC  HL
+10290        SET  4,(HL)
+10300        INC  HL
+10310        LD   (HL),0
+10320        INC  HL
+10330        LD   BC,(INVPTR)
+10340        LD   A,(BC)
+10350        LD   (HL),A
+10360        XOR  A
+10370        LD   (BC),A
+10380        LD   BC,5
+10390        ADD  HL,BC
+10400        LD   (HL),7
+10410        INC  HL
+10420        LD   (HL),0
+10430        LD   A,(IY+1)
+10440        LD   L,A
+10450        LD   H,0
+10460        ADD  HL,HL
+10470        LD   DE,DIMTAB-2
+10480        ADD  HL,DE
+10490        LD   DE,(XYZADR)
+10500        INC  DE
+10510        INC  DE
+10520        LD   A,(DE)
+10530        ADD  A,(HL)
+10540        LD   (DE),A
+10550        LD   A,(NODYNA)
+10560        LD   HL,NOSTAT
+10570        ADD  A,(HL)
+10580        LD   L,A
+10590        LD   H,0
+10600        LD   DE,ACTTAB-1
+10610        ADD  HL,DE
+10620        LD   (HL),4
+10630        JP   PUTIMA
+10640 ;
+10650 USEOBJ LD   HL,(INVPTR)
+10660        LD   A,(HL)
+10670        ADD  A,A
+10680        RET  Z
+10690        LD   C,A
+10700        ADD  A,A
+10710        ADD  A,C
+10720        LD   C,A
+10730        LD   B,0
+10740        LD   HL,ORGTAB-4
+10750        ADD  HL,BC
+10760        LD   A,(HL)
+10770        ADD  A,A
+10780        RET  Z
+10790        LD   C,A
+10800        LD   HL,UADTAB-2
+10810        ADD  HL,BC
+10820        LD   E,(HL)
+10830        INC  HL
+10840        LD   D,(HL)
+10850        EX   DE,HL
+10860        JP   (HL)
+10870 ;
+10880 PUTIMA LD   HL,WORKPG
+10890        LD   DE,WORKPG+1
+10900        LD   BC,#FF
+10910        LD   (HL),B
+10920        LDIR
+10930        LD   HL,(INVPTR)
+10940        LD   A,(HL)
+10950        LD   HL,WORKPG
+10960        OR   A
+10970        JR   Z,PUTIM1
+10980 PUTIM0 ADD  A,A
+10990        LD   L,A
+11000        ADD  A,A
+11010        ADD  A,L
+11020        LD   L,A
+11030        LD   H,0
+11040        LD   DE,ORGTAB-5
+11050        ADD  HL,DE
+11060        LD   A,(HL)
+11070        ADD  A,IMAGES-1
+11080        LD   H,A
+11090        LD   L,0
+11100 PUTIM1 LD   B,#20
+11110        LD   DE,#505B
+11120 PUTIM2 LD   C,8
+11130        LDI
+11140        LDI
+11150        LDI
+11160        LDI
+11170        LD   A,E
+11180        SUB  C
+11190        LD   E,A
+11200        CALL NXTROW
+11210        DJNZ PUTIM2
+11220        RET
+11230 ;
+11240 USE1   LD   HL,TEXT3
+11250        LD   (#FFFE),HL
+11260        RET
+11270 ;
+11280 USE2   LD   A,(CURPHY)
+11290        CP   65
+11300        JR   Z,USE2A
+11310        CP   66
+11320        RET  NZ
+11330 USE2A  LD   HL,(INVPTR)
+11340        LD   (HL),3
+11350        LD   HL,TEXT4
+11360        LD   (#FFFE),HL
+11370        JP   PUTIMA
+11380 ;
+11390 USE3   LD   A,(CURROM)
+11400        CP   44
+11410        RET  NZ
+11420        LD   A,(CURLOG)
+11430        CP   41
+11440        JP   Z,WONGAM
+11450        CP   42
+11460        JP   Z,WONGAM
+11470        RET
+11480 ;
+11490 TEXT8  DEFB 16,7,32,32
+11500        DEFM "CONGRATULA"
+11510        DEFM "TIONS!!  "
+11520        DEFB 16,5,32,32
+11530        DEFM "You have "
+11540        DEFM "defeated "
+11550        DEFM "the Silly"
+11560        DEFM "coonies..."
+11570        DEFB 32,32,16,6
+11580        DEFM "  (Which "
+11590        DEFM "you might "
+11600        DEFM "already ha"
+11610        DEFM "ve figured"
+11620        DEFM " out)  "
+11630        DEFB 16,7,32,32
+11640        DEFM "RESUME ACT"
+11650        DEFM "ION IN "
+11660        DEFB 16,6,32,34
+11670        DEFM "TECHNOFEAR"
+11680        DEFB 34,0
+11690 ;
+11700 TEXT7  DEFB 16,6,32,32
+11710        DEFM "You'll need"
+11720        DEFM " to force "
+11730        DEFM "that one op"
+11740        DEFM "en !"
+11750        DEFB 0
+11760 ;
+11770 TEXT6  DEFB 16,4,32,32
+11780        DEFM "Locked !"
+11790        DEFB 0
+11800 ;
+11810 TEXT5  DEFB 16,4,32,32
+11820        DEFM "Abort."
+11830        DEFB 0
+11840 ;
+11850 TEXT4  DEFB 16,7,32,32
+11860        DEFM "You have "
+11870        DEFM "succesfully"
+11880        DEFM " bought a "
+11890        DEFB 32,16,5,32
+11900        DEFM "Torch !"
+11910        DEFB 0
+11920 ;
+11930 TEXT3  DEFB 16,7,32
+11940        DEFM "This is the"
+11950        DEFB 32,32,16,6
+11960        DEFM " 'Book Of "
+11970        DEFM "Lairfight' "
+11980        DEFB 32,16,7,32
+11990        DEFM "but it's "
+12000        DEFM "nothing spe"
+12010        DEFM "cial..."
+12020        DEFB 0
+12030 ;
+12040 TEXT2  DEFB 16,6,32,32
+12050        DEFM "Too Bad - S"
+12060        DEFM "pace Cadet "
+12070        DEFB 33,0
+12080 ;
+12090 TEXT1  DEFB 16,7,32,32
+12100        DEFM "It's too "
+12110        DEFM "dark in the"
+12120        DEFM "re !"
+12130        DEFB 0
+12140 ;
+12150 TOKEN1 DEFB 8,6,0,8
+12160        DEFB 8,6,0,24
+12170 TOKEN3 DEFB 4,0,0,0
+12180        DEFB 4,12,0,0
+12190        DEFB 6,0,0,20
+12200        DEFB 5,8,0,28, 0
+12210 ;
+12220 TOKEN2 DEFB 7,0,2,6
+12230        DEFB 7,0,2,17
+12240 TOKEN4 DEFB 1,0,0,0
+12250        DEFB 1,0,12,0
+12260        DEFB 3,0,0,20
+12270        DEFB 2,0,8,28, 0
+12280 ;
+12290 TOKEN5 DEFB 66,0,0,0
+12300        DEFB 65,0,0,32, 0
+12310 ;
+12320 TOKEN6 DEFB 51,0,0,0
+12330        DEFB 50,0,0,32, 0
+12340 ;
+12350 TOKEN7 DEFB 44,0,0,16
+12360        DEFB 45,0,0,40
+12370        DEFB 44,0,8,8
+12380        DEFB 45,0,8,32
+12390        DEFB 44,0,16,0
+12400        DEFB 45,0,16,24
+12410        DEFB 43,250,16,0
+12420        DEFB 0
+12430 ;
+12440 TOKEN8 DEFB 52,0,0,0
+12450        DEFB 52,0,8,0
+12460        DEFB 52,8,0,0
+12470        DEFB 52,8,8,0
+12480        DEFB 52,16,0,0
+12490        DEFB 52,16,8,0
+12500        DEFB 52,24,0,0
+12510        DEFB 52,24,8,0
+12520        DEFB 52,32,0,0
+12530        DEFB 52,32,8,0
+12540        DEFB 52,40,0,0
+12550        DEFB 52,40,8,0, 0
+12560 ;
+12570 TOKEN9 DEFB 46,0,0,16
+12580        DEFB 46,0,4,12
+12590        DEFB 46,0,8,8
+12600        DEFB 46,0,12,4
+12610        DEFB 46,0,16,0, 0
+12620 ;
+12630 TOKENA DEFB 52,0,0,0
+12640        DEFB 52,8,0,0
+12650        DEFB 52,0,8,0
+12660        DEFB 52,8,8,0
+12670        DEFB 52,0,16,0
+12680        DEFB 52,8,16,0
+12690        DEFB 52,0,24,0
+12700        DEFB 52,8,24,0
+12710        DEFB 52,0,32,0
+12720        DEFB 52,8,32,0
+12730        DEFB 52,0,40,0
+12740        DEFB 52,8,40,0, 0
+12750 ;
+12760 TOKENB DEFB 52,0,0,0
+12770        DEFB 52,0,8,0
+12780        DEFB 52,240,16,0
+12790        DEFB 52,248,16,0
+12800        DEFB 52,0,16,0
+12810 ;
+12820 TOKENC DEFB 71,0,0,0
+12830        DEFB 72,16,0,0
+12840        DEFB 71,0,8,0
+12850        DEFB 72,16,8,0
+12860        DEFB 71,0,16,0
+12870        DEFB 72,16,16,0
+12880        DEFB 71,0,24,0
+12890        DEFB 72,16,24,0
+12900        DEFB 71,0,32,0
+12910        DEFB 72,16,32,0,0
+12920 ;
+12930 TOKEND DEFB 52,0,0,0
+12940        DEFB 52,0,8,0
+12950        DEFB 52,8,0,0
+12960        DEFB 52,8,8,0,0
+12970 ;
+12980 TOKENE DEFB 42,0,0,0
+12990        DEFB 41,0,8,0,0
+13000 ;
+13010 TOKENF DEFB 59,0,0,0
+13020        DEFB 59,0,0,16
+13030        DEFB 54,0,0,32, 0
+13040 ;
+13050 TOKENG DEFB 53,0,0,0
+13060        DEFB 53,0,8,0
+13070        DEFB 53,0,16,0
+13080        DEFB 53,0,24,0
+13090        DEFB 53,0,32,0, 0
+13100 ;
+13110 TOKENH DEFB 53,0,0,24
+13120        DEFB 53,0,8,12
+13130        DEFB 53,8,0,12
+13140        DEFB 53,0,16,0
+13150        DEFB 53,8,8,0
+13160        DEFB 53,16,0,0, 0
+13170 ;
+13180 TOKENI DEFB 10,0,0,0
+13190        DEFB 9,0,0,32
+13200        DEFB 12,8,0,0
+13210        DEFB 11,8,0,32, 0
